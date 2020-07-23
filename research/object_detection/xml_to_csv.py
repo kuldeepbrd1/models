@@ -29,7 +29,7 @@ def xml_to_csv(path):
 def main(xml_path):
     image_path = xml_path #os.path.join(os.getcwd(), 'annotations')
     xml_df = xml_to_csv(image_path)
-    xml_df.to_csv('speed_labels.csv', index=None)
+    xml_df.to_csv(os.path.join(xml_path,'..','speed_labels.csv'), index=None)
     print('Successfully converted xml to csv: \n  Output file: speed_labels.csv')
 
 
@@ -43,19 +43,21 @@ argumentList = fullCmdArguments[1:]
 unixOptions = "xml"
 gnuOptions = ["xml_path"]
 
-try:
-    arguments, values = getopt.getopt(argumentList, unixOptions, gnuOptions)
-except getopt.error as err:
-    # output error, and return with an error code
-    print (str(err))
-    sys.exit(2)
+# try:
+#     arguments, values = getopt.getopt(argumentList, unixOptions, gnuOptions)
+# except getopt.error as err:
+#     # output error, and return with an error code
+#     print (str(err))
+#     sys.exit(2)
 
-for currentArgument, currentValue in arguments:
-    if currentArgument in ("-xml", "--xml_path"):
-        xml_path = currentValue
-        print ("Taken")
-        main(xml_path)
-    else:
-        print( "Please add an argument containing path to the xml annotations directory \n xml_to_csv.py -xml /path/to/xml_dir")
+# for currentArgument, currentValue in arguments:
+#     if currentArgument in ("-xml", "--xml_path"):
+#         xml_path = currentValue
+#         print ("Taken")
+#         xml_path = "C:\\Users\\apoca\\Desktop\\Thesis Offline\\KPEC\\speed\\detection_annotations\\xml"
+#         main(xml_path)
+#     else:
+#         print( "Please add an argument containing path to the xml annotations directory \n xml_to_csv.py -xml /path/to/xml_dir")
         
-
+xml_path = "C:\\Users\\apoca\\Desktop\\Thesis Offline\\KPEC\\speed\\detection_annotations\\xml"
+main(xml_path)
